@@ -6,7 +6,7 @@
       <input 
         v-model="data.newTodoName"
         @keyup.enter="addTodo"
-        placeholder="Add To-Do"
+        placeholder="Add a To-Do"
         type="text"
         >
     </div>
@@ -31,7 +31,7 @@ export default {
       let todos = ref([])
       
       let data = reactive({
-        newTodoName: 'Add a To-Do',
+        newTodoName: '',
         todos: [
         {
           id: 1,
@@ -49,18 +49,18 @@ export default {
       })
 
       let todosCount = computed(() => {
-        return todos.value.length
+        return data.todos.length
       })
      
      function addTodo() {
       let newTodo = {
         //Date used as random ID
         id: Date.now(),
-        name: newTodoName.value
+        name: data.newTodoName
       }
-      todos.value.push(newTodo);
+      data.todos.push(newTodo);
       //removes entry upon enter
-      newTodoName.value = ''
+      data.newTodoName = ''
      }
 
     function deleteTodo(i){
